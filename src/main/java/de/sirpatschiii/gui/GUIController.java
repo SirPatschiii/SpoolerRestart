@@ -31,8 +31,10 @@ public class GUIController extends BaseWindowController {
 
     @FXML
     public void initialize() {
+        // Disable force clear option
         chkForceClearFiles.setDisable(true);
 
+        // Add tooltip to the force clear option
         String message = """
                 Achtung!
                 Diese Option entzieht Prozessen, welche ggf. Dateien in der Druckerwarteschlange sperren, den sogenannten Lock.
@@ -197,6 +199,9 @@ public class GUIController extends BaseWindowController {
                             appendToConsole("Druckerwarteschlange erfolgreich gestartet.");
                             appendToConsole("");
                         });
+
+                        // Wait before terminating to complete console output
+                        Thread.sleep(500);
 
                     } catch (IOException | InterruptedException e) {
                         logger.error("In the execution of the processing background thread occurred an error!", e);
