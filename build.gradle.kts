@@ -24,7 +24,7 @@ application {
 }
 
 javafx {
-    version = "21"
+    version = "21.0.5"
     modules(
         "javafx.base", "javafx.controls", "javafx.fxml", "javafx.graphics", "javafx.media", "javafx.swing", "javafx.web"
     )
