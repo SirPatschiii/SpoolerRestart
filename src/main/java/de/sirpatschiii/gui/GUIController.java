@@ -148,10 +148,14 @@ public class GUIController extends BaseWindowController {
                                         appendToConsole("");
                                     } else if (lockedFiles.size() == 1) {
                                         appendToConsole("");
-                                        appendToConsole(lockedFiles.size() + " blockierte Datei wurde gefunden.");
+                                        appendToConsole(lockedFiles.size() + " blockierte Datei wurde gefunden:");
+                                        appendToConsole(lockedFiles.getFirst().getName());
                                     } else {
                                         appendToConsole("");
-                                        appendToConsole(lockedFiles.size() + " blockierte Dateien wurden gefunden.");
+                                        appendToConsole(lockedFiles.size() + " blockierte Dateien wurden gefunden:");
+                                        for (File file : lockedFiles) {
+                                            System.out.println(file.getName());
+                                        }
                                     }
                                 });
                                 Thread.sleep(200);
@@ -199,6 +203,9 @@ public class GUIController extends BaseWindowController {
                             appendToConsole("Druckerwarteschlange erfolgreich gestartet.");
                             appendToConsole("");
                         });
+
+                        // Clear handle.exe output for next run
+                        FileLockChecker.resultHandleEXE = "";
 
                         // Wait before terminating to complete console output
                         Thread.sleep(500);
