@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<BorderPane fx:id="rootBorderPane" onMouseClicked="#handleMouseClickedOnBorderPane"
+            onMouseDragged="#handleMouseDraggedOnBorderPane" onMouseMoved="#handleOnMouseMovedOnBorderPane"
+            onMousePressed="#handleMousePressedOnBorderPane" onMouseReleased="#handleMouseReleasedOnBorderPane"
+            prefHeight="160.0" prefWidth="440.0" stylesheets="@../../css/borderpane.css"
+            xmlns="http://javafx.com/javafx/21.0.3" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="de.sirpatschiii.alerts.WarningAlertController">
+    <left>
+        <Separator fx:id="separatorL" orientation="VERTICAL" prefHeight="200.0" stylesheets="@../../css/separatorV.css"
+                   BorderPane.alignment="CENTER">
+        </Separator>
+    </left>
+    <right>
+        <Separator fx:id="separatorR" orientation="VERTICAL" prefHeight="200.0" stylesheets="@../../css/separatorV.css"
+                   BorderPane.alignment="CENTER"/>
+    </right>
+    <bottom>
+        <Separator fx:id="separatorB" prefWidth="200.0" stylesheets="@../../css/separatorH.css"
+                   BorderPane.alignment="CENTER"/>
+    </bottom>
+    <top>
+        <VBox>
+            <children>
+                <HBox maxHeight="40.0" minHeight="40.0" prefHeight="40.0" prefWidth="1280.0">
+                    <children>
+                        <HBox fx:id="hBoxMenuBar" alignment="CENTER_LEFT" onMouseClicked="#handleDoubleClickOnMenuBar"
+                              onMouseDragged="#handleMouseDraggedOnMenuBar"
+                              onMousePressed="#handleMousePressedOnMenuBar"
+                              onMouseReleased="#handleMouseReleasedOnMenuBar" stylesheets="@../../css/hboxmenubar.css"
+                              HBox.hgrow="ALWAYS">
+                            <children>
+                                <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../icons/DMWarning.png"/>
+                                    </image>
+                                </ImageView>
+                                <Label fx:id="lblHeader" stylesheets="@../../css/label.css" text="Header">
+                                    <font>
+                                        <Font name="Arial" size="14.0"/>
+                                    </font>
+                                    <HBox.margin>
+                                        <Insets left="8.0"/>
+                                    </HBox.margin>
+                                </Label>
+                            </children>
+                            <HBox.margin>
+                                <Insets/>
+                            </HBox.margin>
+                            <padding>
+                                <Insets left="4.0"/>
+                            </padding>
+                        </HBox>
+                        <HBox alignment="CENTER_RIGHT" HBox.hgrow="NEVER">
+                            <children>
+                                <Button fx:id="btnExit" cache="true" focusTraversable="false" maxHeight="39.0"
+                                        maxWidth="40.0" minHeight="39.0" minWidth="40.0" mnemonicParsing="false"
+                                        onAction="#handleActionOnBTNExit" prefHeight="39.0" prefWidth="40.0"
+                                        stylesheets="@../../css/windowControl/exitButton.css">
+                                    <graphic>
+                                        <ImageView cache="true" fitHeight="39.0" fitWidth="40.0" pickOnBounds="true">
+                                            <viewport>
+                                                <Rectangle2D height="40.0" width="40.0"/>
+                                            </viewport>
+                                        </ImageView>
+                                    </graphic>
+                                </Button>
+                            </children>
+                        </HBox>
+                    </children>
+                </HBox>
+                <Separator fx:id="separatorT" focusTraversable="false" stylesheets="@../../css/separatorH.css"/>
+            </children>
+        </VBox>
+    </top>
+    <center>
+        <VBox spacing="4.0" BorderPane.alignment="CENTER">
+            <children>
+                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                    <children>
+                        <Label fx:id="lblMessage" stylesheets="@../../css/label.css" text="Content">
+                            <font>
+                                <Font name="Arial" size="14.0"/>
+                            </font>
+                        </Label>
+                    </children>
+                </HBox>
+                <HBox alignment="CENTER_RIGHT" spacing="4.0">
+                    <children>
+                        <Button fx:id="btnAccept" mnemonicParsing="false" onAction="#handleActionOnBTNAccept"
+                                stylesheets="@../../css/button.css" text="Option"/>
+                        <Button fx:id="btnCancel" mnemonicParsing="false" onAction="#handleActionOnBTNCancel"
+                                stylesheets="@../../css/button.css" text="Abbrechen"/>
+                    </children>
+                    <VBox.margin>
+                        <Insets bottom="4.0" right="4.0"/>
+                    </VBox.margin>
+                </HBox>
+            </children>
+        </VBox>
+    </center>
+</BorderPane>
