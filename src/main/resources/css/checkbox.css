@@ -1,0 +1,19 @@
+.check-box {
+    -fx-font-family: "Arial";
+    -fx-font-size: 14;
+    -fx-text-fill: -fx-font-standard;
+}
+
+.check-box .box {
+    -fx-border-radius: 3px;
+    -fx-border-color: -fx-light-gray;
+    -fx-background-color: -fx-light-gray;
+}
+
+.check-box:focused .box {
+    -fx-border-color: -fx-dark-orange;
+}
+
+.check-box:selected .mark {
+    -fx-background-color: -fx-dark-orange;
+}

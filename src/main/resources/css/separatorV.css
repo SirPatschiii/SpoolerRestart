@@ -1,0 +1,5 @@
+.separator:vertical .line {
+    -fx-background-color: -fx-dark-orange;
+    -fx-pref-width: 1;
+    -fx-border-color: null;
+}

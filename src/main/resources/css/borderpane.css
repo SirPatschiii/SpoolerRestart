@@ -1,0 +1,19 @@
+* {
+    -fx-dark-gray: rgb(33, 37, 42);
+    -fx-medium-gray: rgb(40, 44, 52);
+    -fx-light-gray: rgb(58, 63, 73);
+
+    -fx-dark-orange: rgb(255, 109, 0);
+    -fx-medium-orange: rgb(255, 137, 0);
+    -fx-light-orange: rgb(255, 159, 0);
+
+    -fx-font-standard: rgb(187, 187, 187);
+    -fx-font-focused: rgb(255, 255, 255);
+}
+
+#rootBorderPane {
+    -fx-font-family: "Arial";
+    -fx-font-size: 14;
+    -fx-text-fill: -fx-font-standard;
+    -fx-background-color: -fx-medium-gray;
+}

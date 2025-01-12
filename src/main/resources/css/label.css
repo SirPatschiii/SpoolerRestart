@@ -1,0 +1,18 @@
+.label {
+    -fx-font-family: "Arial";
+    -fx-font-size: 14;
+    -fx-text-fill: -fx-font-standard;
+}
+
+#lblError {
+    -fx-text-fill: -fx-dark-orange;
+}
+
+#lblHeaderGUI {
+    -fx-font-size: 22;
+    -fx-text-fill: -fx-dark-orange;
+}
+
+#lblHeader {
+    -fx-font-size: 16
+}

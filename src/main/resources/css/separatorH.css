@@ -1,0 +1,5 @@
+.separator:horizontal .line {
+    -fx-background-color: -fx-dark-orange;
+    -fx-pref-height: 1;
+    -fx-border-color: null;
+}

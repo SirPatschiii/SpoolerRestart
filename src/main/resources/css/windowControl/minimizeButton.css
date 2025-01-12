@@ -1,0 +1,16 @@
+#btnMinimize {
+    -fx-background-color: -fx-dark-gray;
+    -fx-border-radius: 0px;
+    -fx-background-radius: 0px;
+    -fx-border-color: none;
+}
+
+#btnMinimize {
+    -fx-graphic: url("../../icons/DMMinimize.png");
+}
+
+#btnMinimize:hover {
+    -fx-graphic: url("../../icons/DMMinimizeFocused.png");
+    -fx-background-color: rgb(56, 59, 65);
+    -fx-border-color: none;
+}

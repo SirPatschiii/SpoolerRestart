@@ -1,0 +1,21 @@
+#btnExit {
+    -fx-background-color: -fx-dark-gray;
+    -fx-border-radius: 0px;
+    -fx-background-radius: 0px;
+    -fx-border-color: none;
+}
+
+#btnExit {
+    -fx-graphic: url("../../icons/DMExit.png");
+}
+
+#btnExit:hover {
+    -fx-background-color: rgb(232, 17, 35);
+    -fx-border-color: none;
+    -fx-graphic: url("../../icons/DMExitFocused.png");
+}
+
+#btnExit:pressed {
+    -fx-background-color: rgb(152, 25, 37);
+    -fx-border-color: none;
+}

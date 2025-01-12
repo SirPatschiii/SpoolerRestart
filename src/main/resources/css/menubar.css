@@ -1,0 +1,21 @@
+.menu-bar, .menu, .menu-item .label, .menu-bar .label {
+    -fx-font-family: "Arial";
+    -fx-font-size: 14;
+    -fx-text-fill: -fx-font-standard;
+}
+
+#barMenu {
+    -fx-background-color: -fx-dark-gray;
+}
+
+#barMenu * {
+    -fx-background-color: -fx-dark-gray;
+}
+
+#barMenu .label:hover {
+    -fx-text-fill: -fx-font-focused;
+}
+
+.menu-item:focus .label, .menu-item:hover .label {
+    -fx-text-fill: -fx-font-focused;
+}
