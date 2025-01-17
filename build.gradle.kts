@@ -6,7 +6,7 @@ plugins {
 }
 
 group = "de.sirpatschiii"
-version = "1.0-SNAPSHOT"
+version = "1.0"
 
 repositories {
     mavenCentral()
@@ -32,4 +32,11 @@ javafx {
 
 java {
     modularity.inferModulePath.set(false)
+}
+
+tasks.jar {
+    archiveFileName.set("SpoolerRestart-${version}.jar")
+    manifest {
+        attributes["Main-Class"] = application.mainClass.get()
+    }
 }
