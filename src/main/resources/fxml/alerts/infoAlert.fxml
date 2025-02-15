@@ -11,7 +11,7 @@
             onMousePressed="#handleMousePressedOnBorderPane" onMouseReleased="#handleMouseReleasedOnBorderPane"
             prefHeight="180.0" prefWidth="400.0" stylesheets="@../../css/borderpane.css"
             xmlns="http://javafx.com/javafx/21.0.3" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="de.sirpatschiii.alerts.WarningAlertController">
+            fx:controller="de.sirpatschiii.alerts.InfoAlertController">
     <left>
         <Separator fx:id="separatorL" orientation="VERTICAL" stylesheets="@../../css/separatorV.css"
                    BorderPane.alignment="CENTER">
@@ -37,7 +37,7 @@
                             <children>
                                 <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
-                                        <Image url="@../../icons/DMWarning.png"/>
+                                        <Image url="@../../icons/DMInfo.png"/>
                                     </image>
                                 </ImageView>
                                 <Label fx:id="lblHeader" stylesheets="@../../css/label.css" text="Header">
@@ -81,7 +81,7 @@
     <center>
         <VBox spacing="4.0" BorderPane.alignment="CENTER">
             <children>
-                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
                     <children>
                         <Label fx:id="lblMessage" minHeight="-Infinity" stylesheets="@../../css/label.css"
                                text="Content" textAlignment="CENTER" wrapText="true">
@@ -97,9 +97,7 @@
                 <HBox alignment="CENTER_RIGHT" spacing="4.0">
                     <children>
                         <Button fx:id="btnAccept" mnemonicParsing="false" onAction="#handleActionOnBTNAccept"
-                                stylesheets="@../../css/button.css" text="Option"/>
-                        <Button fx:id="btnCancel" mnemonicParsing="false" onAction="#handleActionOnBTNCancel"
-                                stylesheets="@../../css/button.css" text="Cancel"/>
+                                stylesheets="@../../css/button.css" text="Accept"/>
                     </children>
                     <VBox.margin>
                         <Insets/>
