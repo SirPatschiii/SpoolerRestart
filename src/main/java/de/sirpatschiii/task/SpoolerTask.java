@@ -1,5 +1,6 @@
 package de.sirpatschiii.task;
 
+import de.sirpatschiii.alerts.errorhandler.ErrorBus;
 import de.sirpatschiii.base.Configuration;
 import de.sirpatschiii.gui.GUIController;
 import de.sirpatschiii.handle64.Handle64Manager;
@@ -67,9 +68,9 @@ public class SpoolerTask extends Task<Void> {
             startSpooler();
 
             // Wait before terminating to complete console output
-            Thread.sleep(2000);
+            Thread.sleep(500);
         } catch (InterruptedException e) {
-            logger.error("In the execution of the processing background thread occurred an error!", e);
+            ErrorBus.getInstance().reportError("In the execution of the processing background thread occurred an error!", e);
             controller.appendToConsole("Fehler: " + e.getMessage());
         }
         return null;

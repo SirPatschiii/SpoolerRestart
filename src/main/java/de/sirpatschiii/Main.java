@@ -1,6 +1,9 @@
 package de.sirpatschiii;
 
+import de.sirpatschiii.alerts.errorhandler.ErrorBus;
+import de.sirpatschiii.alerts.errorhandler.ErrorHandler;
 import de.sirpatschiii.base.Configuration;
+import de.sirpatschiii.base.SceneLoadException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -22,6 +25,16 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) {
+        // Set default global uncaught exception handler
+        Thread.setDefaultUncaughtExceptionHandler((thread, throwable) -> {
+            ErrorBus.getInstance().reportError(throwable.getMessage(), throwable);
+        });
+
+        // Register the error listener
+        ErrorBus.getInstance().setErrorListener(event -> {
+            ErrorHandler.error(event.message(), event.exception());
+        });
+
         try {
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/gui/GUI.fxml")));
             Scene scene = new Scene(root);
@@ -34,7 +47,7 @@ public class Main extends Application {
             stage.setTitle("SpoolerRestart");
             stage.show();
         } catch (IOException e) {
-            logger.error("An error occurred while switching a scene!", e);
+            ErrorBus.getInstance().reportError(new SceneLoadException(e));
         }
     }
 }

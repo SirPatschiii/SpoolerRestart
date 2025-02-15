@@ -1,6 +1,7 @@
 package de.sirpatschiii.util;
 
 import com.sun.jna.platform.win32.*;
+import de.sirpatschiii.alerts.errorhandler.ErrorBus;
 import de.sirpatschiii.base.Configuration;
 import org.slf4j.Logger;
 
@@ -11,13 +12,13 @@ public class Shell {
 
     public static String runCommandInBackground(String command) {
         // Generate a temp file to return output
-        File tempFile;
+        File tempFile = null;
         try {
             tempFile = File.createTempFile("SpoolerRestartTemp", ".txt");
             tempFile.deleteOnExit();
         } catch (IOException e) {
-            logger.error("In the temp file creation process occurred an error!", e);
-            throw new RuntimeException(e);
+            ErrorBus.getInstance().reportError("In the temp file creation process occurred an error!", e);
+            System.exit(-1);
         }
 
         // Setup ShellExecuteEx structure
@@ -28,12 +29,11 @@ public class Shell {
         execInfo.lpParameters = "/c " + command + " > " + tempFile.getAbsolutePath();
         execInfo.nShow = WinUser.SW_HIDE;
 
-        logger.info(execInfo.lpParameters);
+        logger.info("Ran ShellExecute command: {}", execInfo.lpParameters);
 
         // Execute the command
         if (!Shell32.INSTANCE.ShellExecuteEx(execInfo)) {
-            logger.error("In the execution process of the command \"{}\" occurred an error!", execInfo.lpParameters);
-            throw new RuntimeException("ShellExecuteEx failed with the following command: " + execInfo.lpParameters);
+            ErrorBus.getInstance().reportError(new ShellException("In the execution process of the command \"" + execInfo.lpParameters + "\" occurred an error!", null));
         }
 
         // Wait for the process to complete
@@ -42,28 +42,26 @@ public class Shell {
             if (result == WinBase.WAIT_OBJECT_0) {
                 Kernel32.INSTANCE.CloseHandle(execInfo.hProcess);
             } else if (result == WinBase.WAIT_FAILED) {
-                logger.error("An handle didn't come to a stop!");
-                throw new RuntimeException("An handle didn't come to a stop!");
+                ErrorBus.getInstance().reportError(new ShellException("An handle didn't come to a stop!", null));
             }
         }
 
         // Read output
-        BufferedReader reader;
+        BufferedReader reader = null;
         StringBuilder sb = new StringBuilder();
-        String line;
+        String line = null;
 
         try {
             reader = new BufferedReader(new FileReader(tempFile));
         } catch (FileNotFoundException e) {
-            logger.error("A file reader couldn't read a temp file created by a shell!", e);
-            throw new RuntimeException(e);
+            ErrorBus.getInstance().reportError("A file reader couldn't read a temp file created by a shell!", e);
+            System.exit(-1);
         }
 
         try {
             line = reader.readLine();
         } catch (IOException e) {
-            logger.error("A text line couldn't been read from a temp file!", e);
-            throw new RuntimeException(e);
+            ErrorBus.getInstance().reportError("A text line couldn't been read from a temp file!", e);
         }
 
         while (line != null) {
@@ -72,8 +70,7 @@ public class Shell {
             try {
                 line = reader.readLine();
             } catch (IOException e) {
-                logger.error("A text line couldn't been read from a temp file!", e);
-                throw new RuntimeException(e);
+                ErrorBus.getInstance().reportError("A text line couldn't been read from a temp file!", e);
             }
         }
 
@@ -82,13 +79,13 @@ public class Shell {
 
     public static String runCommandInBackgroundPP(String command) {
         // Generate a temp file to return output
-        File tempFile;
+        File tempFile = null;
         try {
             tempFile = File.createTempFile("SpoolerRestartTemp", ".txt");
             tempFile.deleteOnExit();
         } catch (IOException e) {
-            logger.error("In the temp file creation process occurred an error!", e);
-            throw new RuntimeException(e);
+            ErrorBus.getInstance().reportError("In the temp file creation process occurred an error!", e);
+            System.exit(-1);
         }
 
         // Build the command
@@ -100,30 +97,28 @@ public class Shell {
             Process process = processBuilder.start();
             int exitCode = process.waitFor(); // Wait for the process to finish
             if (exitCode != 0) {
-                logger.error("Command execution failed with exit code {}", exitCode);
+                ErrorBus.getInstance().reportError(new ShellException("Command execution failed with exit code " + exitCode, null));
             }
         } catch (IOException | InterruptedException e) {
-            logger.error("An error occurred executing a command!", e);
-            throw new RuntimeException(e);
+            ErrorBus.getInstance().reportError(new ShellException("An error occurred executing a command!", e));
         }
 
         // Read output
-        BufferedReader reader;
+        BufferedReader reader = null;
         StringBuilder sb = new StringBuilder();
-        String line;
+        String line = null;
 
         try {
             reader = new BufferedReader(new FileReader(tempFile));
         } catch (FileNotFoundException e) {
-            logger.error("A file reader couldn't read a temp file created by a shell!", e);
-            throw new RuntimeException(e);
+            ErrorBus.getInstance().reportError("A file reader couldn't read a temp file created by a shell!", e);
+            System.exit(-1);
         }
 
         try {
             line = reader.readLine();
         } catch (IOException e) {
-            logger.error("A text line couldn't been read from a temp file!", e);
-            throw new RuntimeException(e);
+            ErrorBus.getInstance().reportError("A text line couldn't been read from a temp file!", e);
         }
 
         while (line != null) {
@@ -132,8 +127,7 @@ public class Shell {
             try {
                 line = reader.readLine();
             } catch (IOException e) {
-                logger.error("A text line couldn't been read from a temp file!", e);
-                throw new RuntimeException(e);
+                ErrorBus.getInstance().reportError("A text line couldn't been read from a temp file!", e);
             }
         }
 

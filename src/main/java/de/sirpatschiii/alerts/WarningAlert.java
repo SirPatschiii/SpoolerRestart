@@ -1,5 +1,7 @@
 package de.sirpatschiii.alerts;
 
+import de.sirpatschiii.alerts.errorhandler.ErrorBus;
+import de.sirpatschiii.base.SceneLoadException;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Dimension2D;
 import javafx.scene.Parent;
@@ -37,7 +39,7 @@ public class WarningAlert extends CustomAlert {
             // Store the controller to access later on
             warningAlertController = loader.getController();
         } catch (IOException e) {
-            logger.error("An error occurred while switching a scene!", e);
+            ErrorBus.getInstance().reportError(new SceneLoadException(e));
         }
     }
 

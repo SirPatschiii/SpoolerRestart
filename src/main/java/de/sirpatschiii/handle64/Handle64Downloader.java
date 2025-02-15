@@ -1,5 +1,6 @@
 package de.sirpatschiii.handle64;
 
+import de.sirpatschiii.alerts.errorhandler.ErrorBus;
 import de.sirpatschiii.base.Configuration;
 import org.slf4j.Logger;
 
@@ -28,8 +29,7 @@ public class Handle64Downloader {
                 Files.createDirectories(installPath);
             }
         } catch (IOException e) {
-            logger.error("In the process of creating the tools directory occurred an error!", e);
-            throw new RuntimeException(e);
+            ErrorBus.getInstance().reportError(new Handle64DownloaderException("In the process of creating the tools directory occurred an error!", e));
         }
 
         // Check if handle.exe is already downloaded
@@ -44,18 +44,14 @@ public class Handle64Downloader {
             try {
                 in.transferTo(out);
             } catch (IOException e) {
-                logger.error("In the download process of handle.exe occurred an error!", e);
-                throw new RuntimeException(e);
+                ErrorBus.getInstance().reportError(new Handle64DownloaderException("In the download process of handle.exe occurred an error!", e));
             }
         } catch (MalformedURLException e) {
-            logger.error("The syntax of the URL to handle.exe might be incorrect!", e);
-            throw new RuntimeException(e);
+            ErrorBus.getInstance().reportError(new Handle64DownloaderException("The syntax of the URL to handle.exe might be incorrect!", e));
         } catch (FileNotFoundException e) {
-            logger.error("The file output stream could not find the destination file!", e);
-            throw new RuntimeException(e);
+            ErrorBus.getInstance().reportError(new Handle64DownloaderException("The file output stream could not find the destination file!", e));
         } catch (IOException e) {
-            logger.error("In the process of downloading handle.exe occurred an error!", e);
-            throw new RuntimeException(e);
+            ErrorBus.getInstance().reportError(new Handle64DownloaderException("In the process of downloading handle.exe occurred an error!", e));
         }
         logger.info("Download of handle.exe completed successfully.");
 
@@ -66,15 +62,14 @@ public class Handle64Downloader {
         if (Files.exists(exePath) && Files.isExecutable(exePath)) {
             logger.info("Handle64.exe extracted correctly.");
         } else {
-            logger.error("Handle64.exe couldn't be found in the tools directory!");
+            ErrorBus.getInstance().reportError(new Handle64DownloaderException("Handle64.exe couldn't be found in the tools directory!", null));
         }
 
         // Delete zip file
         try {
             Files.deleteIfExists(zipPath);
         } catch (IOException e) {
-            logger.error("In the deletion process of the zip file occurred an error!", e);
-            throw new RuntimeException(e);
+            ErrorBus.getInstance().reportError(new Handle64DownloaderException("In the deletion process of the zip file occurred an error!", e));
         }
     }
 
@@ -88,22 +83,18 @@ public class Handle64Downloader {
                     try (FileOutputStream fos = new FileOutputStream(outputFile)) {
                         zis.transferTo(fos);
                     } catch (FileNotFoundException e) {
-                        logger.error("The file output stream could not find the destination file!", e);
-                        throw new RuntimeException(e);
+                        ErrorBus.getInstance().reportError(new Handle64DownloaderException("The file output stream could not find the destination file!", e));
                     } catch (IOException e) {
-                        logger.error("In the process of saving the file from the zip occurred an error!", e);
-                        throw new RuntimeException(e);
+                        ErrorBus.getInstance().reportError("In the process of saving the file from the zip occurred an error!", e);
                     }
                     outputFile.setExecutable(true);
                     break;
                 }
             }
         } catch (FileNotFoundException e) {
-            logger.error("The file output stream could not find the destination file!", e);
-            throw new RuntimeException(e);
+            ErrorBus.getInstance().reportError(new Handle64DownloaderException("The file output stream could not find the destination file!", e));
         } catch (IOException e) {
-            logger.error("In the process of unzipping occurred an error!", e);
-            throw new RuntimeException(e);
+            ErrorBus.getInstance().reportError(new Handle64DownloaderException("In the process of unzipping occurred an error!", e));
         }
     }
 

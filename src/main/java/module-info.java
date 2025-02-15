@@ -17,4 +17,5 @@ module de.sirpatschiii {
     // Open package for fxml
     opens de.sirpatschiii.gui to javafx.fxml;
     opens de.sirpatschiii.alerts to javafx.fxml;
+    opens de.sirpatschiii.alerts.errorhandler to javafx.fxml;
 }
