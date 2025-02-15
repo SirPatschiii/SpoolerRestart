@@ -116,6 +116,7 @@ public class GUIController extends BaseWindowController {
             alert.setMessage("Sind Sie sicher, dass Sie den Prozess starten möchten? \n Achtung, Sie erzwingen das Löschen der Dateien, welche sich in der Druckerwarteschlange befinden!");
         }
         alert.setBTNAcceptText("Start");
+        alert.setBTNCancelText("Abbrechen");
         alert.showAndWait();
 
         return alert.getResult().getButtonData() == ButtonBar.ButtonData.OK_DONE;
@@ -127,7 +128,7 @@ public class GUIController extends BaseWindowController {
             alert.setHeader("Handle64.exe benötigt");
             alert.setMessage("Zum Ausführen des Prozesses wird handle64.exe von der Microsoft Sysinternals Suite benötigt. Mit dem Bestätigen des Downloads akzeptieren Sie die geltenden Lizenzbedingungen!");
             alert.setBTNAcceptText("Download");
-            alert.setBTNCancelText("Abbruch");
+            alert.setBTNCancelText("Abbrechen");
             alert.showAndWait();
 
             if (alert.getResult().getButtonData() == ButtonBar.ButtonData.OK_DONE) {
