@@ -49,3 +49,8 @@
 .text-area .scroll-bar .increment-arrow:pressed, .text-area .scroll-bar .decrement-arrow:pressed {
     -fx-background-color: -fx-dark-orange;
 }
+
+#txaStacktrace {
+    -fx-font-family: "Consolas";
+    -fx-font-size: 11;
+}
