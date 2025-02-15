@@ -11,15 +11,13 @@ import javafx.stage.Stage;
 
 import java.util.Objects;
 
-public class WarningAlertController extends BaseWindowController {
+public class InfoAlertController extends BaseWindowController {
     @FXML
     Label lblHeader;
     @FXML
     Label lblMessage;
     @FXML
     Button btnAccept;
-    @FXML
-    Button btnCancel;
 
     private ButtonType result = null;
 
@@ -34,11 +32,6 @@ public class WarningAlertController extends BaseWindowController {
         closeStage(event);
     }
 
-    public void handleActionOnBTNCancel(ActionEvent event) {
-        result = ButtonType.CANCEL;
-        closeStage(event);
-    }
-
     public void setHeader(String title) {
         lblHeader.setText(title);
     }
@@ -49,10 +42,6 @@ public class WarningAlertController extends BaseWindowController {
 
     public void setBTNAcceptText(String text) {
         btnAccept.setText(text);
-    }
-
-    public void setBTNCancelText(String text) {
-        btnCancel.setText(text);
     }
 
     public ButtonType getResult() {

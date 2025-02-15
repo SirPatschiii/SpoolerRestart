@@ -12,15 +12,15 @@ import javafx.stage.StageStyle;
 import java.io.IOException;
 import java.util.Objects;
 
-public class WarningAlert extends CustomAlert {
-    private WarningAlertController warningAlertController;
+public class InfoAlert extends CustomAlert {
+    private InfoAlertController infoAlertController;
 
-    public WarningAlert() {
+    public InfoAlert() {
         super();
 
         try {
             // Init alert stage
-            FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/fxml/alerts/warningAlert.fxml")));
+            FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/fxml/alerts/infoAlert.fxml")));
             Parent root = loader.load();
             Scene scene = new Scene(root);
             stage = new Stage();
@@ -35,23 +35,19 @@ public class WarningAlert extends CustomAlert {
             stage.centerOnScreen();
 
             // Store the controller to access later on
-            warningAlertController = loader.getController();
+            infoAlertController = loader.getController();
         } catch (IOException e) {
             logger.error("An error occurred while switching a scene!", e);
         }
     }
 
     public void setBTNAcceptText(String text) {
-        warningAlertController.setBTNAcceptText(text);
-    }
-
-    public void setBTNCancelText(String text) {
-        warningAlertController.setBTNCancelText(text);
+        infoAlertController.setBTNAcceptText(text);
     }
 
     @Override
     public void setHeader(String title) {
-        warningAlertController.setHeader(title);
+        infoAlertController.setHeader(title);
         stage.setTitle(title);
     }
 
@@ -60,11 +56,11 @@ public class WarningAlert extends CustomAlert {
         Dimension2D dimension2D = getWrapped16by9Dimensions(message);
         stage.setMinHeight(dimension2D.getHeight() + 112);
         stage.setMinWidth(dimension2D.getWidth() + 60);
-        warningAlertController.setMessage(message);
+        infoAlertController.setMessage(message);
     }
 
     @Override
     public ButtonType getResult() {
-        return warningAlertController.getResult();
+        return infoAlertController.getResult();
     }
 }
