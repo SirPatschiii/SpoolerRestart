@@ -5,7 +5,6 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.slf4j.Logger;
@@ -33,7 +32,6 @@ public class Main extends Application {
             stage.setResizable(false);
             stage.centerOnScreen();
             stage.setTitle("SpoolerRestart");
-            stage.getIcons().add(new Image("/icons/PrinterError.png"));
             stage.show();
         } catch (IOException e) {
             logger.error("An error occurred while switching a scene!", e);

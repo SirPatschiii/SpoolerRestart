@@ -1,4 +1,4 @@
-package de.sirpatschiii;
+package de.sirpatschiii.util;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -33,6 +33,17 @@ public class FileHandler {
         directories.remove(new File(System.getenv("SystemRoot") + "\\System32\\spool\\PRINTERS"));
 
         return directories;
+    }
+
+    public static boolean deleteFile(File file) {
+        boolean success = false;
+
+        // Delete the file if it exists
+        if (file.exists() && file.isFile()) {
+            success = file.delete();
+        }
+
+        return success;
     }
 
     public static int deleteFiles(ArrayList<File> files) {
